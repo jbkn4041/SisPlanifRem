@@ -1,3 +1,14 @@
+import platform
+
+if platform.system() != "Windows":
+    import sys
+    import types
+
+    win32com = types.ModuleType("win32com")
+    win32com.client = types.SimpleNamespace(Dispatch=lambda *args, **kwargs: None)
+    sys.modules["win32com"] = win32com
+    sys.modules["win32com.client"] = win32com.client
+
 import streamlit as st
 import pandas as pd
 import sqlite3
